@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sirui.smartcar.ui.activity.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@+id/tab_botton_ll"
+        />
+
+    <LinearLayout
+        android:id="@+id/tab_botton_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#F5F5F5"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/tab1_rl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="tabBtnOnClicked"
+            android:padding="@dimen/main_tab_rl_btn_padding">
+
+            <ImageView
+                android:id="@+id/tab1_iv"
+                android:layout_width="@dimen/main_tab_rl_btn_wh"
+                android:layout_height="@dimen/main_tab_rl_btn_wh"
+                android:layout_centerHorizontal="true"
+                android:focusable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/device_btn_selector" />
+
+            <TextView
+                android:id="@+id/tab1_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tab1_iv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/main_tab_rl_txt_mtop"
+                android:singleLine="true"
+                android:text="设备"
+                android:textColor="@color/black"
+                android:textSize="@dimen/main_tab_rl_btn_txt" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tab2_rl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="tabBtnOnClicked"
+            android:padding="@dimen/main_tab_rl_btn_padding">
+
+            <ImageView
+                android:id="@+id/tab2_iv"
+                android:layout_width="@dimen/main_tab_rl_btn_wh"
+                android:layout_height="@dimen/main_tab_rl_btn_wh"
+                android:layout_centerHorizontal="true"
+                android:focusable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/news_btn_selector" />
+
+            <TextView
+                android:id="@+id/tab2_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tab2_iv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/main_tab_rl_txt_mtop"
+                android:singleLine="true"
+                android:text="资讯"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/main_tab_rl_btn_txt" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/tab3_rl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="tabBtnOnClicked"
+            android:padding="@dimen/main_tab_rl_btn_padding">
+
+            <ImageView
+                android:id="@+id/tab3_iv"
+                android:layout_width="@dimen/main_tab_rl_btn_wh"
+                android:layout_height="@dimen/main_tab_rl_btn_wh"
+                android:layout_centerHorizontal="true"
+                android:focusable="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/market_btn_selector" />
+
+            <TextView
+                android:id="@+id/tab3_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tab3_iv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/main_tab_rl_txt_mtop"
+                android:singleLine="true"
+                android:text="商店"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/main_tab_rl_btn_txt" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

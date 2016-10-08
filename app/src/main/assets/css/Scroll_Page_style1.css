@@ -1,0 +1,43 @@
+.tab{
+    border: #272727 solid 1px;
+    width: 100%;
+    height: 150px;
+    border-left: none;
+    border-right: none;
+}
+.td1{
+    width: 140px;
+}
+.img{
+    width: 140px;
+    height: 150px;
+    background-color: #44ff27;
+}
+.number{
+    font-size: 6px;
+
+}
+.title{
+    font-size: 16px;
+    font-weight: bold;
+
+}
+.intro{
+    font-size: 6px;
+}
+.praise{
+    font-size: 6px;
+
+}
+.comment{
+    font-size: 6px;
+
+}
+
+.date{
+    float: right;
+    font-size: 8px;
+}
+.hyperlink{
+    font-size: 8px;
+}

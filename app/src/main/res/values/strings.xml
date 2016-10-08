@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">物联网平台</string>
+
+    <string name="drawer_left_share">分享应用</string>
+    <string name="drawer_left_info">我的资料</string>
+    <string name="drawer_left_production">我的作品</string>
+    <string name="drawer_left_service">售后服务</string>
+
+
+
+    <!--<string name="navigation_drawer_open">Open navigation drawer</string>-->
+    <!--<string name="navigation_drawer_close">Close navigation drawer</string>-->
+
+    <!--<string name="action_settings">Settings</string>-->
+</resources>

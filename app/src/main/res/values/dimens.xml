@@ -1,0 +1,18 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">180dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!--主界面底部Tab-->
+    <!--<dimen name="main_tab_botton_height">60dp</dimen>-->
+    <dimen name="main_tab_rl_btn_padding">3dp</dimen>
+    <dimen name="main_tab_rl_btn_txt">12sp</dimen>
+    <dimen name="main_tab_rl_btn_wh">29dp</dimen>
+    <dimen name="main_tab_rl_txt_mtop">1dp</dimen>
+
+
+</resources>
