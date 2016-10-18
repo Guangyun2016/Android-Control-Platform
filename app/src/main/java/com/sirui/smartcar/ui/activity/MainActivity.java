@@ -12,12 +12,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sirui.smartcar.R;
 import com.sirui.smartcar.ui.fragment.Device;
-import com.sirui.smartcar.ui.fragment.Market;
 import com.sirui.smartcar.ui.fragment.News;
+import com.sirui.smartcar.ui.fragment.Shop;
+import com.wx.android.common.util.ToastUtils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment[] fragments;
     private Device deviceFrag;
     private News newsFrag;
-    private Market marketFrag;
+    private Shop marketFrag;
     // 索引
     private int currentFragIndex = 0;
     private int index = 0;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         tab_container = (RelativeLayout) findViewById(R.id.tab_container);
         deviceFrag = new Device();
         newsFrag = new News();
-        marketFrag = new Market();
+        marketFrag = new Shop();
         fragments = new Fragment[]{deviceFrag, newsFrag, marketFrag};
 
         imageViews = new ImageView[3];
@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_share_app) {
-            Toast.makeText(this, R.string.drawer_left_share, Toast.LENGTH_SHORT).show();
+            ToastUtils.showToast(getString(R.string.drawer_left_share));
         } else if (id == R.id.nav_info) {
-            Toast.makeText(this, R.string.drawer_left_info, Toast.LENGTH_SHORT).show();
+            ToastUtils.showToast(getString(R.string.drawer_left_info));
         } else if (id == R.id.nav_production) {
-            Toast.makeText(this, R.string.drawer_left_production, Toast.LENGTH_SHORT).show();
+            ToastUtils.showToast(getString(R.string.drawer_left_production));
         } else if (id == R.id.nav_service) {
-            Toast.makeText(this, R.string.drawer_left_service, Toast.LENGTH_SHORT).show();
+            ToastUtils.showToast(getString(R.string.drawer_left_service));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

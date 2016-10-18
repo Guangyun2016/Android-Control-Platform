@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.sirui.smartcar.utils.AppDatas;
+import com.wx.android.common.util.ToastUtils;
 
 import java.io.File;
 
@@ -42,6 +43,8 @@ public class AppApplication extends Application {
          * 在 Application 里面做这件事再适合不过了（如下面的代码），注意多次的调用初始化是无意义的。
          */
         Fresco.initialize(this.getApplicationContext());
+
+        ToastUtils.init(getApplicationContext());
 
 
 //        if (AppDatas.sdcard != null) {

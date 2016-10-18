@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_smart_car2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sirui.smartcar.ui.activity.SmartCar2">
+
+    <RelativeLayout
+        android:id="@+id/rl_smartcar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F9F9F9">
+
+
+        <ImageButton
+            android:id="@+id/btn_smartcar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/selector_btn_go_back"
+            android:onClick="tabBtnOnClicked" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="思锐智能二代小车"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+
+    <HorizontalScrollView
+        android:id="@+id/sc_hsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_smartcar"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/ll_smart_car_canvas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/smart_car_padding_l_r"
+            android:paddingRight="@dimen/smart_car_padding_l_r">
+
+            <CheckBox
+                android:id="@+id/sc_painting"
+                android:layout_width="@dimen/smart_car_h_w"
+                android:layout_height="@dimen/smart_car_h_w"
+                android:background="@drawable/selector_painting"
+                android:button="@null" />
+
+            <CheckBox
+                android:id="@+id/sc_del"
+                android:layout_width="@dimen/smart_car_h_w"
+                android:layout_height="@dimen/smart_car_h_w"
+                android:layout_marginLeft="@dimen/smart_car_margingleft"
+                android:background="@drawable/pic_painting_clear"
+                android:button="@null" />
+
+            <CheckBox
+                android:id="@+id/sc_graph"
+                android:layout_width="@dimen/smart_car_h_w"
+                android:layout_height="@dimen/smart_car_h_w"
+                android:layout_marginLeft="@dimen/smart_car_margingleft"
+                android:background="@drawable/selector_graph"
+                android:button="@null" />
+
+            <CheckBox
+                android:id="@+id/sc_ruler"
+                android:layout_width="@dimen/smart_car_h_w"
+                android:layout_height="@dimen/smart_car_h_w"
+                android:layout_marginLeft="@dimen/smart_car_margingleft"
+                android:background="@drawable/selector_ruler"
+                android:button="@null" />
+
+            <CheckBox
+                android:id="@+id/sc_speed"
+                android:layout_width="@dimen/smart_car_h_w"
+                android:layout_height="@dimen/smart_car_h_w"
+                android:layout_marginLeft="@dimen/smart_car_margingleft"
+                android:background="@drawable/selector_speed"
+                android:button="@null" />
+
+            <CheckBox
+                android:id="@+id/sc_spot"
+                android:layout_width="@dimen/smart_car_h_w"
+                android:layout_height="@dimen/smart_car_h_w"
+                android:layout_marginLeft="@dimen/smart_car_margingleft"
+                android:background="@drawable/selector_spot"
+                android:button="@null" />
+
+            <CheckBox
+                android:id="@+id/sc_picture_taking"
+                android:layout_width="@dimen/smart_car_h_w"
+                android:layout_height="@dimen/smart_car_h_w"
+                android:layout_marginLeft="@dimen/smart_car_margingleft"
+                android:background="@drawable/selector_picture_taking"
+                android:button="@null" />
+
+            <CheckBox
+                android:id="@+id/sc_bluetooth"
+                android:layout_width="@dimen/smart_car_h_w"
+                android:layout_height="@dimen/smart_car_h_w"
+                android:layout_marginLeft="@dimen/smart_car_margingleft"
+                android:background="@drawable/pic_bluetooth"
+                android:button="@null" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+    <com.sirui.smartcar.widget.MyView
+        android:id="@+id/sc_draw_path_view"
+        android:layout_below="@id/sc_hsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</RelativeLayout>

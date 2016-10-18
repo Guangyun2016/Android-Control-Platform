@@ -13,6 +13,12 @@
     <dimen name="main_tab_rl_btn_txt">12sp</dimen>
     <dimen name="main_tab_rl_btn_wh">29dp</dimen>
     <dimen name="main_tab_rl_txt_mtop">1dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
+    <!--小车控制面板图标尺寸-->
+    <dimen name="smart_car_h_w">45dp</dimen>
+    <dimen name="smart_car_margingleft">40dp</dimen>
+    <dimen name="smart_car_padding_l_r">30dp</dimen>
 
 </resources>

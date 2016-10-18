@@ -1,5 +1,6 @@
 package com.sirui.smartcar.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.sirui.smartcar.R;
 import com.sirui.smartcar.adapter.DeviceListAdapter;
+import com.sirui.smartcar.ui.activity.ScrollingActivity;
+import com.sirui.smartcar.ui.activity.SmartCar2;
+import com.wx.android.common.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,7 +83,20 @@ public class Device extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), (String)data.get(position).get("name"), Toast.LENGTH_SHORT).show();
+
+                ToastUtils.showToast((String) data.get(position).get("name"));
+
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(getActivity(), ScrollingActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(getActivity(), SmartCar2.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(getActivity(), ScrollingActivity.class));
+                        break;
+                }
             }
         });
 

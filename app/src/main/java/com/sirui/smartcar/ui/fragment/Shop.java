@@ -25,25 +25,25 @@ import com.sirui.smartcar.utils.AppDatas;
  * Created by ygy on 2016/9/29 0029.
  */
 
-public class News extends Fragment {
+public class Shop extends Fragment {
 
     private WebView webView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.news_layout, null);
+        View rootView = inflater.inflate(R.layout.shop_layout, null);
 
-        webView = (WebView) rootView.findViewById(R.id.news_webview);
+        webView = (WebView) rootView.findViewById(R.id.shop_webview);
         init_webview();
 
         return rootView;
     }
 
-    private void init_webview() {
+    public void init_webview() {
         // TODO Auto-generated method stub
         // ----可以用打开本包内asset目录下的index.html文件的方法
-        webView.loadUrl(AppDatas.NEWS_URL);
+        webView.loadUrl(AppDatas.SHOP_URL);
         // 设置支持获取手势焦点(区别这里不用getSettings())用户手动输入用户名、密码或其他，则webview必须设置支持获取手势焦点
         webView.requestFocusFromTouch();
 
@@ -232,5 +232,4 @@ public class News extends Fragment {
     public void onDestroy() {
         super.onDestroy();
     }
-
 }
