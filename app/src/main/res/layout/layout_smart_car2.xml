@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/go_back_view_margin_left"
             android:background="@drawable/selector_btn_go_back"
             android:onClick="tabBtnOnClicked" />
 
@@ -41,7 +41,9 @@
         android:id="@+id/sc_hsView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rl_smartcar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/rl_smartcar"
         android:scrollbars="none">
 
         <LinearLayout
@@ -92,39 +94,58 @@
                 android:background="@drawable/selector_speed"
                 android:button="@null" />
 
-            <CheckBox
-                android:id="@+id/sc_spot"
-                android:layout_width="@dimen/smart_car_h_w"
-                android:layout_height="@dimen/smart_car_h_w"
-                android:layout_marginLeft="@dimen/smart_car_margingleft"
-                android:background="@drawable/selector_spot"
-                android:button="@null" />
-
-            <CheckBox
-                android:id="@+id/sc_picture_taking"
-                android:layout_width="@dimen/smart_car_h_w"
-                android:layout_height="@dimen/smart_car_h_w"
-                android:layout_marginLeft="@dimen/smart_car_margingleft"
-                android:background="@drawable/selector_picture_taking"
-                android:button="@null" />
-
-            <CheckBox
-                android:id="@+id/sc_bluetooth"
-                android:layout_width="@dimen/smart_car_h_w"
-                android:layout_height="@dimen/smart_car_h_w"
-                android:layout_marginLeft="@dimen/smart_car_margingleft"
-                android:background="@drawable/pic_bluetooth"
-                android:button="@null" />
-
         </LinearLayout>
     </HorizontalScrollView>
 
 
-    <com.sirui.smartcar.widget.MyView
-        android:id="@+id/sc_draw_path_view"
-        android:layout_below="@id/sc_hsView"
+    <RelativeLayout
+        android:id="@+id/car_speed_seekBar_rl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sc_hsView"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/car_speed_seekBar_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前速度："
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txt_show_car_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50%"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/car_speed_seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="50"
+            android:layout_marginTop="25dp"
+            android:minHeight="10dp" />
+
+    </RelativeLayout>
+
+
+    <com.sirui.smartcar.widget.DrawCarTrackPath
+        android:id="@+id/sc_draw_path_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sc_hsView" />
 
 
 </RelativeLayout>

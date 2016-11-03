@@ -165,7 +165,7 @@
             // 下拉
             if(_absMoveY <= me.opts.distance){
                 me._offsetY = _absMoveY;
-                // todo：move时会不断清空、增加dom，有可能影响性能，下同
+                // move时会不断清空、增加dom，有可能影响性能，下同
                 me.$domUp.html(me.opts.domUp.domRefresh);
             // 指定距离 < 下拉距离 < 指定距离*2
             }else if(_absMoveY > me.opts.distance && _absMoveY <= me.opts.distance*2){

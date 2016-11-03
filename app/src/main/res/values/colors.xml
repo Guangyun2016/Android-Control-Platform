@@ -7,6 +7,8 @@
     <color name="gray">#808080</color><!--灰色 -->
     <color name="gray_C8C7C8">#C8C7C8</color><!--灰色 -->
     <color name="gray_8E8E8E">#8E8E8E</color><!--灰色 -->
+    <color name="gray_fcfcfc">#fcfcfc</color><!--灰色 -->
+    <color name="gray_aafcfcfc">#55fcfcfc</color><!--灰色 -->
     <color name="white">#ffffff</color><!--白色 -->
     <color name="black">#000000</color><!--黑色 -->
     <color name="light_gray">#ffe6e6e6</color>

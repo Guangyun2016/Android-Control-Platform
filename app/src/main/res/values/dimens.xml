@@ -10,7 +10,7 @@
     <!--主界面底部Tab-->
     <!--<dimen name="main_tab_botton_height">60dp</dimen>-->
     <dimen name="main_tab_rl_btn_padding">3dp</dimen>
-    <dimen name="main_tab_rl_btn_txt">12sp</dimen>
+    <dimen name="main_tab_rl_btn_txt">11sp</dimen>
     <dimen name="main_tab_rl_btn_wh">29dp</dimen>
     <dimen name="main_tab_rl_txt_mtop">1dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
@@ -20,5 +20,17 @@
     <dimen name="smart_car_h_w">45dp</dimen>
     <dimen name="smart_car_margingleft">40dp</dimen>
     <dimen name="smart_car_padding_l_r">30dp</dimen>
+
+    <!--返回按钮marginLeft-->
+    <dimen name="go_back_view_margin_left">8dp</dimen>
+
+    <!--shop界面-->
+    <dimen name="good_list_size">170dp</dimen>
+    <!--轮播图片点点尺寸-->
+    <dimen name="shop_picLoop_point_size">5dp</dimen>
+
+
+    <!--device界面-->
+    <dimen name="device_picLoop_point_size">8dp</dimen>
 
 </resources>

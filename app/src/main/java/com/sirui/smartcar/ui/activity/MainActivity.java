@@ -1,5 +1,6 @@
 package com.sirui.smartcar.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -7,12 +8,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.SaveCallback;
 import com.sirui.smartcar.R;
 import com.sirui.smartcar.ui.fragment.Device;
 import com.sirui.smartcar.ui.fragment.News;
@@ -75,6 +80,7 @@ public class MainActivity extends AppCompatActivity
                 .hide(marketFrag)
                 .show(deviceFrag)
                 .commit();
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -137,4 +143,46 @@ public class MainActivity extends AppCompatActivity
         textViews[index].setTextColor(getResources().getColor(R.color.black));
         currentFragIndex = index;
     }
+
+    /**
+     * 跳到京东商城页面
+     * @param view
+     */
+    public void GoToJingDongShop(View view) {
+        startActivity(new Intent(this, ShopJingDong.class));
+
+    }
+
+    /**
+     * 跳到天猫商城页面
+     * @param view
+     */
+    public void goToTianMaoShop(View view) {
+        startActivity(new Intent(this, ShopTianMao.class));
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

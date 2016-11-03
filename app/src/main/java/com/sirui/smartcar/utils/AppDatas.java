@@ -58,9 +58,10 @@ public class AppDatas {
     public static final String NEWS_URL = "http://www.guokr.com/scientific/channel/techb/";
 
     /**
-     * 暂时填充商店页面
+     * 商店页面
      */
-    public static final String SHOP_URL ="http://wap.sirui-photo.com/products.php";
+    public static final String SHOP_URL_TIANMAO ="https://sirui.tmall.com/";
+    public static final String SHOP_URL_JINGDONG ="http://mall.jd.com/index-1000002121.html";
 
 
 }

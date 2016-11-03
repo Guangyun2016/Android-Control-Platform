@@ -9,6 +9,9 @@ import android.view.View;
 
 import com.sirui.smartcar.R;
 
+/**
+ * 这里暂时没用到
+ */
 public class ScrollingActivity extends AppCompatActivity {
 
     @Override

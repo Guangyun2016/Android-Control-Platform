@@ -1,14 +1,11 @@
-package com.sirui.smartcar.ui.fragment;
+package com.sirui.smartcar.ui.activity;
 
 import android.graphics.Bitmap;
 import android.net.http.SslError;
-import android.os.Bundle;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.HttpAuthHandler;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
@@ -21,29 +18,24 @@ import android.webkit.WebViewClient;
 import com.sirui.smartcar.R;
 import com.sirui.smartcar.utils.AppDatas;
 
-/**
- * Created by ygy on 2016/9/29 0029.
- */
-
-public class News extends Fragment {
+public class ShopTianMao extends AppCompatActivity {
 
     private WebView webView;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.news_layout, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tian_mao_web);
 
-        webView = (WebView) rootView.findViewById(R.id.news_webview);
+        webView = (WebView) findViewById(R.id.tm_webview);
         init_webview();
 
-        return rootView;
     }
 
     private void init_webview() {
         //  Auto-generated method stub
         // ----可以用打开本包内asset目录下的index.html文件的方法
-        webView.loadUrl(AppDatas.NEWS_URL);
+        webView.loadUrl(AppDatas.SHOP_URL_TIANMAO);
         // 设置支持获取手势焦点(区别这里不用getSettings())用户手动输入用户名、密码或其他，则webview必须设置支持获取手势焦点
         webView.requestFocusFromTouch();
 
@@ -211,7 +203,7 @@ public class News extends Fragment {
         webSetting.setAllowFileAccess(true);// 设置可以访问文件
         webSetting.setLoadsImagesAutomatically(true);// 支持自动加载图片
 
-        String cacheDirPath = getActivity().getFilesDir().getAbsolutePath() + AppDatas.PATH_CACHE;
+        String cacheDirPath = getFilesDir().getAbsolutePath() + AppDatas.PATH_CACHE;
         webSetting.setDatabasePath(cacheDirPath); // 设置数据库缓存路径
         webSetting.setAppCachePath(cacheDirPath); // 设置 Application Caches 缓存目录
         webSetting.setAppCacheEnabled(true); // 开启 Application Caches 功能
@@ -233,4 +225,7 @@ public class News extends Fragment {
         super.onDestroy();
     }
 
+    public void goBackView(View view) {
+        this.finish();
+    }
 }

@@ -7,12 +7,22 @@
 
 
     <RelativeLayout xmlns:fresco="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/nl_head_r"
+        android:id="@+id/jd_head_r"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="#F9F9F9">
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/go_back_view_margin_left"
+            android:background="@drawable/pic_btn_back"
+            android:onClick="goBackView" />
 
 
         <TextView
@@ -21,22 +31,22 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:text="资讯"
+            android:text="京东旗舰店"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
     </RelativeLayout>
 
     <View
-        android:id="@+id/nl_view1"
+        android:id="@+id/jd_view1"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_below="@id/nl_head_r"
+        android:layout_below="@id/jd_head_r"
         android:background="@color/gray_8E8E8E" />
 
     <WebView
-        android:id="@+id/news_webview"
+        android:id="@+id/jd_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/nl_view1" />
+        android:layout_below="@+id/jd_view1" />
 </RelativeLayout>

@@ -45,15 +45,84 @@
         android:layout_below="@id/dl_head_r"
         android:background="@color/gray_8E8E8E" />
 
-    <ListView
-        android:id="@+id/dl_lv"
+    <com.sirui.smartcar.widget.BounceScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/dl_view1"
-        android:divider="@color/light_gray"
-        android:dividerHeight="1px"
-        android:footerDividersEnabled="true"
-        android:headerDividersEnabled="true" />
+        android:layout_below="@+id/dl_view1"
+        android:scrollbars="none">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txt_connect_your_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal"
+                android:text="连接你的设备"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_device_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/txt_connect_your_device"
+                android:gravity="center_horizontal"
+                android:text="这里显示设备名称和型号"
+                android:textSize="15dp" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/device_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_below="@id/txt_device_title"
+                android:layout_marginTop="40dp" />
+
+            <LinearLayout
+                android:id="@+id/device_point_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/device_viewpager"
+                android:layout_marginTop="35dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" />
+
+
+            <Button
+                android:id="@+id/btn_how_to_connect_device"
+                android:layout_width="250dp"
+                android:layout_height="42dp"
+                android:layout_below="@id/device_point_ll"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/btn_connnect_device"
+                android:text="连接设备"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_device_know_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_how_to_connect_device"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:gravity="center_horizontal"
+                android:text="了解更多"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+    </com.sirui.smartcar.widget.BounceScrollView>
 
 
 </RelativeLayout>

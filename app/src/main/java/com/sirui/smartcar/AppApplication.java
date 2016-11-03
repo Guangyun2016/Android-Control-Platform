@@ -2,6 +2,7 @@ package com.sirui.smartcar;
 
 import android.app.Application;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.sirui.smartcar.utils.AppDatas;
 import com.wx.android.common.util.ToastUtils;
@@ -13,27 +14,6 @@ import java.io.File;
  */
 public class AppApplication extends Application {
 
-//    public static String cacheDir = "/siruiapp";
-
-
-    private boolean ExistSDCard() {
-        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public void intiFolders() {
-        for (int i = 0; i < AppDatas.dirs.length; i++) {
-            File dir = new File(AppDatas.dirs[i]);
-            // 如果不存在就创建
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-        }
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -44,26 +24,17 @@ public class AppApplication extends Application {
          */
         Fresco.initialize(this.getApplicationContext());
 
+        /**
+         * Utils工具类
+         */
         ToastUtils.init(getApplicationContext());
 
-
-//        if (AppDatas.sdcard != null) {
-//            Log.i("AppApplication", AppDatas.sdcard);
-//            intiFolders();
-//        }
-
         /**
-         * 如果存在SD卡则将缓存写入SD卡,否则写入手机内存
+         * LeanCloud初始化参数依次为 this, AppId, AppKey
          */
-/*        try {
-            if (getApplicationContext().getExternalCacheDir() != null && ExistSDCard()) {
-                cacheDir = getApplicationContext().getExternalCacheDir().toString();
-//                LogUtil.d("sd卡", cacheDir);
-            } else {
-                cacheDir = getApplicationContext().getCacheDir().toString();
-            }
-        } catch (Exception e) {
-            cacheDir = getApplicationContext().getCacheDir().toString();
-        }*/
+        AVOSCloud.initialize(this, "5YpgpCvuf3HCaxR6v5hTtSWI-gzGzoHsz", "m6AQs84XgRzNRVxHry6dJWDH");
+
+
+
     }
 }
