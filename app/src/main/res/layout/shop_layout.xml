@@ -34,7 +34,7 @@
         android:layout_below="@id/sl_head_r"
         android:background="@color/gray_8E8E8E" />
 
-    <com.sirui.smartcar.widget.BounceScrollView
+    <com.sirui.iotplatform.widget.BounceScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/sl_view1"
@@ -186,7 +186,7 @@
 
         </RelativeLayout>
 
-    </com.sirui.smartcar.widget.BounceScrollView>
+    </com.sirui.iotplatform.widget.BounceScrollView>
 
 
 </RelativeLayout>

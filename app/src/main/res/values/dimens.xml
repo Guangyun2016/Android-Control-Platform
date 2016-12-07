@@ -33,4 +33,8 @@
     <!--device界面-->
     <dimen name="device_picLoop_point_size">8dp</dimen>
 
+    <!--activity Dialog-->
+    <!--<dimen name="activity_dialog_marginbotton">0dp</dimen>-->
+
+
 </resources>

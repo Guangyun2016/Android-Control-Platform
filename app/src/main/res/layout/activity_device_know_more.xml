@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_device_know_more"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sirui.iotplatform.ui.activity.DeviceKnowMore">
+
+
+    <RelativeLayout
+        android:id="@+id/km_head_r"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#F9F9F9">
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/go_back_view_margin_left"
+            android:background="@drawable/pic_btn_back"
+            android:onClick="goBackView" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="了解更多"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/km_view1"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_8E8E8E" />
+
+</RelativeLayout>

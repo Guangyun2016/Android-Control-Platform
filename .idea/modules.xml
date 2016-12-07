@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android-Control-Platform.iml" filepath="$PROJECT_DIR$/Android-Control-Platform.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baseble/baseble.iml" filepath="$PROJECT_DIR$/baseble/baseble.iml" />
     </modules>
   </component>
 </project>

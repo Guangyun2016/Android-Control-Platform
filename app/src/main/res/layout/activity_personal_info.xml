@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_personal_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sirui.iotplatform.ui.activity.PersonalInfo">
+
+
+    <RelativeLayout
+        android:id="@+id/p_head_r"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#F9F9F9">
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/go_back_view_margin_left"
+            android:background="@drawable/pic_btn_back"
+            android:onClick="goBackView" />
+
+
+        <!--        <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:text="个人中心"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />-->
+
+    </RelativeLayout>
+
+    <com.sirui.iotplatform.widget.BounceScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+
+        <LinearLayout xmlns:fresco="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/side_nav_bar"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/ps_imageView"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                fresco:actualImageScaleType="fitCenter"
+                fresco:placeholderImage="@drawable/defalut_headportrait"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:roundAsCircle="true"
+                fresco:viewAspectRatio="1" />
+
+            <TextView
+                android:id="@+id/ps_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:text="Jack Ma"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <TextView
+                android:id="@+id/ps_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="不一样的花朵" />
+
+        </LinearLayout>
+
+
+    </com.sirui.iotplatform.widget.BounceScrollView>
+
+
+</RelativeLayout>

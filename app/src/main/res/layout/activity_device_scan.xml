@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ble_scan"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    tools:context="com.sirui.iotplatform.ui.activity.BlueScanActivity">
+
+    <RelativeLayout
+        android:id="@+id/ble_scan_rl1"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/light_gray">
+
+        <TextView
+            android:id="@+id/ble_txt_gointo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:text="进入"
+            android:textColor="#33b5e5"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="蓝牙"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/ble_btn_clear"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/pic_clear_normal" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/ble_scan_rl2"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/ble_scan_rl1"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="设备列表"
+            android:textColor="@color/gray"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/ble_scan_refresh"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/pic_refresh"
+            android:clickable="true" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/ble_scan_v"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/ble_scan_rl2"
+        android:background="@color/gray" />
+
+    <ListView
+        android:id="@+id/ble_scan_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ble_scan_v"
+        android:background="@color/white"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+
+
+</RelativeLayout>

@@ -21,7 +21,7 @@
             android:paddingBottom="2dp"
             android:paddingTop="5dp"
             fresco:actualImageScaleType="fitCenter"
-            fresco:placeholderImage="@drawable/ic_head_logo"
+            fresco:placeholderImage="@drawable/defalut_headportrait"
             fresco:placeholderImageScaleType="fitCenter"
             fresco:roundAsCircle="true"
             fresco:viewAspectRatio="1" />
@@ -45,7 +45,7 @@
         android:layout_below="@id/dl_head_r"
         android:background="@color/gray_8E8E8E" />
 
-    <com.sirui.smartcar.widget.BounceScrollView
+    <com.sirui.iotplatform.widget.BounceScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/dl_view1"
@@ -122,7 +122,7 @@
 
         </RelativeLayout>
 
-    </com.sirui.smartcar.widget.BounceScrollView>
+    </com.sirui.iotplatform.widget.BounceScrollView>
 
 
 </RelativeLayout>

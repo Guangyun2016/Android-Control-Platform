@@ -4,7 +4,7 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sirui.smartcar.ui.activity.MainActivity">
+    tools:context="com.sirui.iotplatform.ui.activity.MainActivity">
 
     <RelativeLayout
         android:id="@+id/tab_container"
