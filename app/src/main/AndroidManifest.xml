@@ -139,16 +139,14 @@
         <activity
             android:name=".ui.activity.DeviceKnowMore"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.AppAdvertisement"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ui.activity.AppAdvertisement"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
-
-        <!--推送Service-->
+        <!-- 推送Service -->
         <service android:name="com.avos.avoscloud.PushService" />
 
-        <!--让应用能在关闭的情况下也可以收到推送-->
+        <!-- 让应用能在关闭的情况下也可以收到推送 -->
         <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -157,6 +155,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".ui.activity.CameraControl"></activity>
     </application>
 
 </manifest>

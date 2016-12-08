@@ -446,7 +446,9 @@ public class SmartCar2 extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ViseBluetooth.getInstance().connect(mDevice, false, connectCallback);// 连接
+        if (null != mDevice) {
+            ViseBluetooth.getInstance().connect(mDevice, false, connectCallback);// 连接
+        }
     }
 
     // copy

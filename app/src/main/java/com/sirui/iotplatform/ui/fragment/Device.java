@@ -1,29 +1,53 @@
 package com.sirui.iotplatform.ui.fragment;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.EdgeEffectCompat;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.sirui.iotplatform.R;
 import com.sirui.iotplatform.ui.activity.BlueScanActivity;
+import com.sirui.iotplatform.ui.activity.CameraControl;
 import com.sirui.iotplatform.ui.activity.DeviceKnowMore;
+import com.sirui.iotplatform.ui.activity.SmartCar2;
+import com.sirui.iotplatform.ui.adapter.DeviceAdapter;
 import com.sirui.iotplatform.ui.adapter.DeviceViewPagerAdapter;
 import com.stx.xhb.xbanner.transformers.ZoomPageTransformer;
+import com.vise.baseble.ViseBluetooth;
+import com.vise.baseble.callback.scan.PeriodScanCallback;
+import com.vise.baseble.model.BluetoothLeDevice;
+import com.vise.baseble.model.BluetoothLeDeviceStore;
+import com.vise.baseble.utils.BleUtil;
+import com.wx.android.common.util.SystemUtils;
 import com.wx.android.common.util.ToastUtils;
 
 import java.lang.reflect.Field;
@@ -35,6 +59,8 @@ import java.util.List;
  */
 public class Device extends Fragment {
 
+    private Activity activity;
+    private final String TAG = "Device";
     // 圆形头像
     private SimpleDraweeView cm_image_view;
 
@@ -43,7 +69,6 @@ public class Device extends Fragment {
     private int connectIndex = 0;
     private static final int DEVICE_CAR = 0;
     private static final int DEVICE_HAND_HOLD = 1;
-//    private static final int DEVICE_ZIPAI = 2;
 
     private int[] imgs = {R.drawable.pic_car, R.drawable.pic_hand_hold_stabler};
     private String[] titles = {"智能二代摄影小车", "智能手持稳定器"};
@@ -56,7 +81,7 @@ public class Device extends Fragment {
      **/
     private ArrayList<ImageView> pointViews = new ArrayList<ImageView>();
     private ViewPager mViewPager;
-    private DeviceViewPagerAdapter adapter;
+    private DeviceViewPagerAdapter deviceAdapter;
     private LinearLayout pointContainer;
     // 去除ViewPager滑动到边沿时颜色显示
     private EdgeEffectCompat leftEdge;
@@ -66,16 +91,82 @@ public class Device extends Fragment {
 
     private SharedPreferences sharedPreferences = null;
 
+
+    // ==================================================================ble
+    public static final String EXTRA_BLE_DEVICE = "extra_ble_device";
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 102;
+
+    private TextView txtGoInTo;
+    private ImageButton btnClear;
+    private ImageView bleRefresh;
+
+    private ListView deviceLv;
+    private BluetoothLeDeviceStore bluetoothLeDeviceStore;
+    private volatile List<BluetoothLeDevice> bluetoothLeDeviceList = new ArrayList<>();
+    private DeviceAdapter adapter;
+    private AlertDialog dialog;
+
+
+    // 扫描设备回调
+    private PeriodScanCallback periodScanCallback = new PeriodScanCallback() {
+        @Override
+        public void scanTimeout() {
+            Log.i(TAG, "scan timeout");
+            stopScan();// 停止扫描
+//            dialog.dismiss();
+        }
+
+        @Override
+        public void onDeviceFound(BluetoothLeDevice bluetoothLeDevice) {
+            if (bluetoothLeDeviceStore != null) {
+                bluetoothLeDeviceStore.addDevice(bluetoothLeDevice);
+                bluetoothLeDeviceList = bluetoothLeDeviceStore.getDeviceList();
+            }
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    adapter.setDeviceList(bluetoothLeDeviceList);// 给Adapter数据集
+                }
+            });
+        }
+    };
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (BleUtil.isBleEnable(getActivity())) {
+                    showDeviceDialog();
+                    startScan();
+                } else {
+                    BleUtil.enableBluetooth(getActivity(), 1);
+                }
+            } else {
+                // Permission Denied
+                Log.e(TAG, "LOCATION Permission Denied");
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.device_layout, null);
         initViews(rootView);
+        activity = getActivity();
 
+        ViseBluetooth.getInstance().init(getActivity());
 
         return rootView;
     }
+
 
     public void initViews(View rootView) {
 
@@ -110,28 +201,55 @@ public class Device extends Fragment {
         });
 
         /**
-         * 点击连接设备按钮
+         * Click connect Device button
          */
         btnConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                ToastUtils.showToast("这个是-->" + String.valueOf(connectIndex) + "--" + titles[connectIndex]);
+                /**
+                 * 6.0的sdk要请求权限
+                 */
+                Log.i(TAG, "SDK Version--->" + String.valueOf(SystemUtils.getVersionSDK()));
+                if (SystemUtils.getVersionSDK() >= 23) {
 
-                switch (connectIndex) {
-                    case DEVICE_CAR:
-
-                        startActivity(new Intent(getContext(), BlueScanActivity.class));
-//                        startActivity(new Intent(getContext(), SmartCar2.class));
-                        break;
-                    case DEVICE_HAND_HOLD:
-                        break;
+                    if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                                MY_PERMISSIONS_REQUEST_LOCATION);
+                    } else {
+                        if (BleUtil.isBleEnable(getActivity())) {
+                            showDeviceDialog();
+                            startScan();
+                        } else {
+                            BleUtil.enableBluetooth(getActivity(), 1);
+                        }
+                    }
+                } else {
+                    if (BleUtil.isBleEnable(getActivity())) {
+                        showDeviceDialog();
+                        startScan();
+                    } else {
+                        BleUtil.enableBluetooth(getActivity(), 1);
+                    }
                 }
+
+                ToastUtils.showToast("这个是-->" + String.valueOf(connectIndex) + "--" + titles[connectIndex]);
+//                switch (connectIndex) {
+//                    case DEVICE_CAR:
+//                        ToastUtils.showToast("小车");
+//                        startActivity(new Intent(getContext(), BlueScanActivity.class));
+//                        startActivity(new Intent(getContext(), SmartCar2.class));
+//                        break;
+//                    case DEVICE_HAND_HOLD:
+//                        ToastUtils.showToast("手持稳定器");
+//                        break;
+//                }
             }
         });
 
         /**
-         * 点击了解更多
+         * click know more
          */
         txtKnowMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +257,7 @@ public class Device extends Fragment {
 
                 ToastUtils.showToast("这个是-->" + String.valueOf(connectIndex) + "--" + titles[connectIndex]);
 
+                // 跳到了解更多页面
                 startActivity(new Intent(getActivity(), DeviceKnowMore.class));
 
                 switch (connectIndex) {
@@ -150,6 +269,85 @@ public class Device extends Fragment {
             }
         });
     }
+
+    /**
+     * Open Dialog to choose ble device
+     */
+    public void showDeviceDialog() {
+        dialog = new AlertDialog.Builder(getActivity()).create();
+        dialog.show();
+        Window window = dialog.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        window.setContentView(R.layout.activity_device_scan);
+
+        deviceLv = (ListView) window.findViewById(R.id.ble_scan_listview);
+        txtGoInTo = (TextView) window.findViewById(R.id.ble_txt_gointo);
+        btnClear = (ImageButton) window.findViewById(R.id.ble_btn_clear);
+        bleRefresh = (ImageView) window.findViewById(R.id.ble_scan_refresh);
+
+        bluetoothLeDeviceStore = new BluetoothLeDeviceStore();
+        adapter = new DeviceAdapter(getActivity());
+        deviceLv.setAdapter(adapter);
+
+        deviceLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BluetoothLeDevice device = (BluetoothLeDevice) adapter.getItem(position);// 得到设备对象
+                if (device == null) {
+                    Log.i(TAG, "device == null!!!!!!!!!!!!");
+                    return;
+                }
+
+                Log.i(TAG, device.getName());
+
+                if (connectIndex == DEVICE_CAR) {
+                    // SmartCart2 Control
+                    Intent intent = new Intent(activity, SmartCar2.class);
+                    intent.putExtra(EXTRA_BLE_DEVICE, device);
+                    startActivity(intent);
+                } else if (connectIndex == DEVICE_HAND_HOLD){
+                    // HandHold Device Camera Control
+                    Intent intent = new Intent(activity, CameraControl.class);
+                    startActivity(intent);
+                }
+
+                dialog.dismiss();
+                bleRefresh.clearAnimation();
+            }
+        });
+
+        txtGoInTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (connectIndex == DEVICE_CAR) {
+                    // 进入小车控制界面
+                    startActivity(new Intent(activity, SmartCar2.class));
+                } else if (connectIndex == DEVICE_HAND_HOLD){
+                    // 相机控制
+                    startActivity(new Intent(activity, CameraControl.class));
+                }
+
+                dialog.dismiss();
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast("退出");
+                dialog.dismiss();
+            }
+        });
+
+        bleRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showToast("刷新");
+                startScan();
+            }
+        });
+    }
+
 
     public void getInitViewPager() {
 
@@ -187,13 +385,12 @@ public class Device extends Fragment {
             pointViews.add(pImg);// 这里是游标点集合
         }
 
-        adapter = new DeviceViewPagerAdapter(getActivity(), vData);
-        mViewPager.setAdapter(adapter);
+        deviceAdapter = new DeviceViewPagerAdapter(getActivity(), vData);
+        mViewPager.setAdapter(deviceAdapter);
         mViewPager.setPageTransformer(true, new ZoomPageTransformer());// 页面切换动画
         // ViewPager和title初始化显示内容
         deviceTitle.setText(titles[connectIndex]);// 显示设备名称和型号
         mViewPager.setCurrentItem(0);// 显示第一个元素
-
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -260,18 +457,80 @@ public class Device extends Fragment {
         }
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+//        boolean isSupport = BleUtil.isSupportBle(getActivity());
+//        boolean isOpenBle = BleUtil.isBleEnable(getActivity());
+//
+//        if (BleUtil.isBleEnable(getActivity())) {
+//            startScan();
+//        } else {
+//            BleUtil.enableBluetooth(getActivity(), 1);
+//        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
+//        stopScan();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == getActivity().RESULT_OK) {
+            // 请求打开蓝牙回复
+            if (requestCode == 1) {
+                startScan();
+            }
+        } else if (resultCode == getActivity().RESULT_CANCELED) {
+            /**
+             * dialog dissmiss
+             */
+//            dialog.dismiss();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * Start scan ble device
+     */
+    private void startScan() {
+        if (bluetoothLeDeviceStore != null) {
+            bluetoothLeDeviceStore.clear();
+        }
+        if (adapter != null && bluetoothLeDeviceList != null) {
+            bluetoothLeDeviceList.clear();
+            adapter.setDeviceList(bluetoothLeDeviceList);
+        }
+        ViseBluetooth.getInstance().setScanTimeout(5000).startScan(periodScanCallback);// 开始扫描5s
+
+
+        // 刷新动画
+        Animation circle_anim = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.ble_refresh);
+        LinearInterpolator interpolator = new LinearInterpolator();  //设置匀速旋转，在xml文件中设置会出现卡顿
+        circle_anim.setInterpolator(interpolator);
+        if (circle_anim != null) {
+            bleRefresh.startAnimation(circle_anim);  //开始动画
+        }
+    }
+
+    /**
+     * Stop scan ble device
+     */
+    private void stopScan() {
+        ViseBluetooth.getInstance().stopScan(periodScanCallback);// 停止扫描
+
+        bleRefresh.clearAnimation();// 关闭动画
+    }
+
+
+
 }

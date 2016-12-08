@@ -31,6 +31,9 @@ import com.wx.android.common.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 暂时不用这个BlueScanActivity------用Dialog代替
+ */
 public class BlueScanActivity extends Activity {
 
     private static final String TAG = BlueScanActivity.class.getSimpleName();
