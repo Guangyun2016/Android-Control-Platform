@@ -18,6 +18,8 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.GetCallback;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.StringSignature;
 import com.sirui.iotplatform.R;
 import com.sirui.iotplatform.wxapi.WXEntryActivity;
 
@@ -39,13 +41,17 @@ public class AppAdvertisement extends AppCompatActivity {
     private TimeCount timeCount;
 
 
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case SHOW_ADVERTISEMENT_CODE:
-                    Glide.with(getApplicationContext()).load(url).into(imageView);
+                    Glide.with(getApplicationContext())
+                            .load(url)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(imageView);
                     timeCount.start();// 开始计时
                     break;
             }
@@ -70,7 +76,7 @@ public class AppAdvertisement extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timeCount.onFinish();
+                timeCount.onFinish(); // time count over
                 startActivity(new Intent(AppAdvertisement.this, WXEntryActivity.class));
                 AppAdvertisement.this.finish();
             }
