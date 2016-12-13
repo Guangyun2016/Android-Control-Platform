@@ -24,7 +24,7 @@ android {
 
     /**LeanCloud***/
     //为了解决部分第三方库重复打包了META-INF的问题
-    packagingOptions{
+    packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
@@ -40,13 +40,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
-    testCompile 'junit:junit:4.12'
     // 工具类Utils
-    compile 'com.wx.android.common:common:1.0.1'
     // 图片处理依赖
-    compile 'com.facebook.fresco:fresco:0.12.0'
     //    // 在 API < 14 上的机器支持 WebP 时，需要添加
     //    compile 'com.facebook.fresco:animated-base-support:0.12.0'
     //    // 支持 GIF 动图，需要添加
@@ -57,24 +52,30 @@ dependencies {
     //    // 仅支持 WebP 静态图，需要添加
     //    compile 'com.facebook.fresco:webpsupport:0.12.0'
     // LeanCloud 基础包
-    compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
     // 推送与实时聊天需要的包
     compile('cn.leancloud.android:avoscloud-push:v3.+@aar') { transitive = true }
     // LeanCloud 统计包
-    compile 'cn.leancloud.android:avoscloud-statistics:v3.+'
     // LeanCloud 用户反馈包
-    compile 'cn.leancloud.android:avoscloud-feedback:v3.+@aar'
     // xUtils工具
     compile files('libs/xUtils-2.6.14.jar')
     // XBanner支持图片无限轮播控件
-    compile 'com.xhb:xbanner:1.2.0'
-    compile 'com.nineoldandroids:library:2.4.0'
     // 图片加载库Glide
-    compile 'com.github.bumptech.glide:glide:3.7.0'
     // 微信
     compile files('libs/libammsdk.jar')
     // okhttp
     //    compile 'com.squareup.okhttp3:okhttp:3.4.2'
     // 蓝牙baseble Module
     compile project(':baseble')
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.wx.android.common:common:1.0.1'
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
+    compile 'cn.leancloud.android:avoscloud-statistics:v3.+'
+    compile 'cn.leancloud.android:avoscloud-feedback:v3.+@aar'
+    compile 'com.xhb:xbanner:1.2.0'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:support-v4:24.2.1'
+    testCompile 'junit:junit:4.12'
 }

@@ -36,12 +36,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 读取外部存储权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许程序写入外部存储，如SD卡上写文件 -->
 
-
     <!-- group:android.permission-group.CONTACTS -->
     <!-- permission:android.permission.WRITE_CONTACTS -->
     <!-- permission:android.permission.GET_ACCOUNTS -->
     <!-- permission:android.permission.READ_CONTACTS -->
-
 
     <!-- group:android.permission-group.PHONE -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 访问电话状态 -->
@@ -53,6 +51,9 @@
 
     <!-- group:android.permission-group.CAMERA -->
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 请求相机权限 -->
+    <!-- A camera with RAW capability is required to use this application -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.raw" />
 
 
     <!-- group:android.permission-group.MICROPHONE -->
@@ -132,7 +133,7 @@
             android:name=".ui.activity.PersonalInfo"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <!-- 窗口Activity -->
+        <!-- 扫描ble窗口Activity -->
         <activity
             android:name=".ui.activity.BlueScanActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" />
@@ -155,7 +156,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.activity.CameraControl"></activity>
+        <activity android:name=".ui.activity.CameraControl"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -61,6 +62,7 @@ public class Device extends Fragment {
 
     private Activity activity;
     private final String TAG = "Device";
+    private View mLayout = null;
     // 圆形头像
     private SimpleDraweeView cm_image_view;
 
@@ -147,6 +149,7 @@ public class Device extends Fragment {
             } else {
                 // Permission Denied
                 Log.e(TAG, "LOCATION Permission Denied");
+                Snackbar.make(mLayout, getString(R.string.app_name) + "被禁止读取位置信息", Snackbar.LENGTH_SHORT).show();
             }
             return;
         }
@@ -161,6 +164,7 @@ public class Device extends Fragment {
         View rootView = inflater.inflate(R.layout.device_layout, null);
         initViews(rootView);
         activity = getActivity();
+        mLayout = rootView.findViewById(R.id.device_relativeLayout);
 
         ViseBluetooth.getInstance().init(getActivity());
 
@@ -211,20 +215,10 @@ public class Device extends Fragment {
                  * 6.0的sdk要请求权限
                  */
                 Log.i(TAG, "SDK Version--->" + String.valueOf(SystemUtils.getVersionSDK()));
-                if (SystemUtils.getVersionSDK() >= 23) {
-
-                    if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                                MY_PERMISSIONS_REQUEST_LOCATION);
-                    } else {
-                        if (BleUtil.isBleEnable(getActivity())) {
-                            showDeviceDialog();
-                            startScan();
-                        } else {
-                            BleUtil.enableBluetooth(getActivity(), 1);
-                        }
-                    }
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                            MY_PERMISSIONS_REQUEST_LOCATION);
                 } else {
                     if (BleUtil.isBleEnable(getActivity())) {
                         showDeviceDialog();

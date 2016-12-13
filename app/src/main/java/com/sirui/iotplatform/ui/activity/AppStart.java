@@ -60,8 +60,10 @@ public class AppStart extends Activity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        Log.i(TAG, "Received response permission request.");
         if (requestCode == WRITE_EXTERNAL_STORAGE_REQUEST_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission Granted
                 Log.i(TAG, "WRITE_EXTERNAL_STORAGE Permission Granted");
                 Log.i(TAG, "----------before initFolder()----------");
@@ -78,7 +80,6 @@ public class AppStart extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 全屏显示，一定要在setContentView之前（问题，全屏后第二个界面会抖动）
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -99,15 +100,10 @@ public class AppStart extends Activity {
          * 6.0的sdk要请求权限
          */
         Log.i(TAG, "SDK Version--->" + String.valueOf(SystemUtils.getVersionSDK()));
-        if (SystemUtils.getVersionSDK() >= 23) {
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
-            } else {
-                initFolders();
-            }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
         } else {
             initFolders();
         }

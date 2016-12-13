@@ -6,10 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.sirui.iotplatform.ui.activity.CameraControl">
 
-    <TextView
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="相机控制界面"-->
+        <!--android:textSize="25sp" />-->
+
+    <FrameLayout
+        android:id="@+id/camera_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="相机控制界面"
-        android:textSize="25sp" />
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
